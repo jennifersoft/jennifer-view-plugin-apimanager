@@ -1,0 +1,43 @@
+<div class="layout-head">
+    <h1 class="head">API List</h1>
+    <div class="content">
+        <div class="input-div">
+            <select id="api" size="10"></select>
+        </div>
+    </div>
+
+</div>
+<div id="query-list">
+    <h1 class="head">Parameters</h1>
+    <div class="content">
+        <select id="data-type" class="input param">
+            <option value="json">JSON</option>
+            <option value="xml">XML</option>
+            <option value="txt">TEXT</option>
+        </select>
+        <div class="input-div"><input type="text" class="input" id="api-string"/></div>
+        <button type="button" id="run" class="btn focus"> Run </button>
+        <div id="parameter-list"></div>
+    </div>
+
+</div>
+
+
+<div id="contents" class="layout-body">
+    <div id="tab_contents_1">
+        <div id="data-format">
+            <h1 class="head" id="data-format-name">JSON</h1>
+            <div class="content">
+                <pre></pre>
+            </div>
+
+        </div>
+        <div id="data-table">
+            <h1 class="head">Table or Text<span class="small table-count"></span></h1>
+            <div class="content">
+
+            </div>
+        </div>
+    </div>
+    <div id="splitter" title="You can drag in left and right."><i class="icon-grip3"></i></div>
+</div>

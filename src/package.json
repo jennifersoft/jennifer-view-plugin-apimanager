@@ -1,0 +1,10 @@
+{
+  "title": "API Manager",
+  "description": "",
+  "version": "5.2.1",
+  "mainUrl": "/plugin/apimanager",
+  "mainTpl": "tpl/index.vm",
+  "resources" : [ "res/index.css", "res/index.js" ],
+  "thumbnails": [ "img/jennifer.png", "img/dark.png" ],
+  "i18n": [ "i18n/message_ko.properties", "i18n/message_en.properties" ]
+}
