@@ -1,11 +1,11 @@
-package com.jennifersoft.ctrl;
+package com.aries.ctrl;
 
-import com.jennifersoft.view.service.DomainService;
-import com.jennifersoft.view.service.mng.AgentService;
-import com.jennifersoft.view.service.mng.BusinessService;
-import com.jennifersoft.view.service.perf.TextDataService;
-import com.jennifersoft.view.service.perf.XViewService;
-import com.jennifersoft.view.web.BaseController;
+import com.aries.view.service.DomainService;
+import com.aries.view.service.mng.AgentService;
+import com.aries.view.service.mng.BusinessService;
+import com.aries.view.service.perf.TextDataService;
+import com.aries.view.service.perf.XViewService;
+import com.aries.view.web.BaseController;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = { "/plugin" })
-public class APIManagerController extends BaseController
-{
+public class APIManagerController {
     @Autowired
     TextDataService textDataService;
     @Autowired
