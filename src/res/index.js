@@ -822,7 +822,7 @@ function beautifier(data) {
 }
 
 function api_fetch (param) {
-    jennifer.ui.showLoading();
+    aries.ui.showLoading();
     var ext = '';
     var type = $("#data-type").val();
     if (type !== 'json') {
@@ -852,10 +852,10 @@ function api_fetch (param) {
                 convert_table();
             }
 
-            jennifer.ui.closeLoading();
+            aries.ui.closeLoading();
         },
         error : function (res) {
-            jennifer.ui.closeLoading();
+            aries.ui.closeLoading();
             parse_error(res.responseText);
         }
     })
