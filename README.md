@@ -9,7 +9,7 @@ Execute the following in the JENNIFER% management screen.
  4. Enter the 'apimanager' ID.
  5. Enter the plugin path directly or upload the file.
 
-## How to use Options
+## How to use options
 
 Plugin options are shown in the table below.
 
