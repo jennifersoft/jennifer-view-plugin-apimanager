@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.aries</groupId>
+	<artifactId>apimanager</artifactId>
+	<version>1.1.0</version>
+	<packaging>jar</packaging>
+
+	<name>Open API Manager</name>
+	<description>It is a plug-in that makes it easy to use public API provided by JENNIFER5</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- 플러그인 jar 파일 생성 디렉토리 및 파일 네이밍 설정 -->
+		<plugin.output.directoryName>${project.basedir}/dist</plugin.output.directoryName>
+		<plugin.output.fileName>${project.artifactId}_${env}-${project.version}</plugin.output.fileName>
+	</properties>
+
+	<parent>
+		<!-- TODO: 스프링부트 버전을 변경할 수 있음 -->
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.12.RELEASE</version>
+		<relativePath/>
+	</parent>
+
+	<dependencies>
+		<!-- TODO: 사용자가 필요한 라이브러리 추가하는 영역 -->
+
+		<!-- 제니퍼 플러그인을 구현하기 위한 필수 라이브러리 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.aries</groupId>
+			<artifactId>extension</artifactId>
+			<version>1.0.15</version>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<!-- 독립적으로 실행되는 플러그인 jar 파일 -->
+		<profile>
+			<id>local</id>
+			<properties>
+				<env>local</env>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<outputDirectory>${plugin.output.directoryName}</outputDirectory>
+							<finalName>${plugin.output.fileName}</finalName>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>repackage</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<!-- 제니퍼에 실험실로 추가할 수 있는 jar 파일 (제니퍼 뷰서버에서 사용하는 라이브러리는 모두 제외) -->
+		<profile>
+			<id>jennifer</id>
+			<properties>
+				<env>jennifer</env>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-shade-plugin</artifactId>
+						<version>3.1.1</version>
+						<configuration>
+							<artifactSet>
+								<excludes>
+									<exclude>org.slf4j:*</exclude>
+									<exclude>com.aries:extension:*</exclude>
+									<exclude>org.apache.velocity:*</exclude>
+									<exclude>org.apache.commons:*</exclude>
+                                    <exclude>javax.servlet:*</exclude>
+                                    <exclude>javax.xml.stream:*</exclude>
+                                    <exclude>org.springframework:*</exclude>
+                                    <exclude>org.apache.velocity:*</exclude>
+                                    <exclude>org.apache.commons:*</exclude>
+                                    <exclude>org.json:*</exclude>
+                                    <exclude>org.reflections:*</exclude>
+                                    <exclude>org.quartz-scheduler:*</exclude>
+                                    <exclude>com.fasterxml.jackson.core:*</exclude>
+                                    <exclude>com.thoughtworks.xstream:*</exclude>
+                                    <exclude>com.google.code.gson:*</exclude>
+                                    <exclude>com.google.guava:*</exclude>
+                                    <exclude>com.google.http-client:*</exclude>
+                                    <exclude>com.navercorp.lucy:*</exclude>
+                                    <exclude>commons-fileupload:*</exclude>
+                                    <exclude>commons-codec:*</exclude>
+                                    <exclude>io.jsonwebtoken:*</exclude>
+                                    <exclude>httpunit:*</exclude>
+                                    <exclude>rhino:*</exclude>
+                                    <exclude>gdata:*</exclude>
+								</excludes>
+							</artifactSet>
+							<outputFile>${plugin.output.directoryName}/${plugin.output.fileName}.${project.packaging}</outputFile>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>shade</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>http://support.jennifersoft.com:8081/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>mvnrepository</id>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+	</repositories>
+</project>

@@ -1,0 +1,33 @@
+{
+  "name": "aries.apimanager",
+  "version": "1.1.0",
+  "scripts": {
+    "server": "java -jar ./dist/apimanager-1.1.0.jar",
+    "dist": "webpack --env=production",
+    "client": "webpack --watch & webpack-dev-server --env=development",
+    "start": "npm run client"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.0",
+    "postcss": "^6.0.22",
+    "postcss-loader": "^2.1.6",
+    "postcss-scss": "^1.0.5",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.16.5",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
