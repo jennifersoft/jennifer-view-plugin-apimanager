@@ -2,24 +2,10 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-let path = require('path')
-let clientPath = path.resolve(__dirname, 'src/main/client')
-let outputPath = path.resolve(__dirname, 'out')
-
 module.exports = (env) => {
-    let minimizer = [];
-
-    if(env == 'production') {
-        outputPath = path.resolve(__dirname, 'src/main/resources/static')
-
-        minimizer.push(new UglifyJsPlugin({
-            cache: true,
-            parallel: true,
-            sourceMap: true
-        }))
-
-        minimizer.push(new OptimizeCSSAssetsPlugin({}))
-    }
+    let path = require('path')
+    let clientPath = path.resolve(__dirname, 'src/main/client')
+    let outputPath = path.resolve(__dirname, (env == 'production') ? 'src/main/resources/static' : 'out')
 
     return {
         mode: (env == 'development') ? 'development' : 'production',
@@ -38,10 +24,28 @@ module.exports = (env) => {
             'juijs-chart': 'jui'
         },
         optimization: {
-            minimizer: minimizer
+            minimizer: (env == 'production') ? [
+                new UglifyJsPlugin({
+                    cache: true,
+                    parallel: true,
+                    sourceMap: true
+                }),
+                new OptimizeCSSAssetsPlugin({})
+            ] : []
         },
         module: {
             rules: [{
+                enforce: "pre",
+                test: /\.js$/,
+                loader: "source-map-loader"
+            }, {
+                enforce: 'pre',
+                test: /\.ts$/,
+                loader: 'tslint-loader'
+            }, {
+                test: /\.ts$/,
+                use: 'awesome-typescript-loader'
+            }, {
                 test: /\.js$/,
                 use: [{
                     loader: 'babel-loader',
@@ -81,6 +85,9 @@ module.exports = (env) => {
                     }
                 ]
             }]
+        },
+        resolve: {
+            extensions: [ ".ts", ".js", ".json", ".scss" ]
         },
         devServer: {
             hot: false,

@@ -1,4 +1,4 @@
-import i18n from './i18n.js'
+import i18n from './i18n'
 import Styles from './index.css'
 
 const api_list = [
