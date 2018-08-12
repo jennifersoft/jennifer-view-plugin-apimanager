@@ -2,7 +2,7 @@
   "name": "aries.apimanager",
   "version": "1.1.0",
   "scripts": {
-    "server": "java -jar ./dist/apimanager-1.1.0.jar",
+    "server": "java -jar ./dist/apimanager_local-1.1.0.jar",
     "test": "jest",
     "dist": "jest & webpack --env=production",
     "client": "webpack --watch & webpack-dev-server --env=development",
