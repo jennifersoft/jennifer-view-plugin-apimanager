@@ -17,8 +17,8 @@ public class APIManagerController extends PluginController {
         ModelAndView modelAndView = new ModelAndView("templates/index.vm");
 
         ModelMap map = modelAndView.getModelMap();
-        map.put("hostName", PropertyUtil.getValue("apimanager", "host_name", "http://support.jennifersoft.com:8000"));
-        map.put("apiToken", PropertyUtil.getValue("apimanager", "api_token", "P71tjczNMoo"));
+        map.put("hostName", PropertyUtil.getValue("apimanager", "host_name", "http://127.0.0.1:7900"));
+        map.put("apiToken", PropertyUtil.getValue("apimanager", "api_token", ""));
 
         return modelAndView;
     }
